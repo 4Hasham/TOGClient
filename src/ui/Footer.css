@@ -1,0 +1,14 @@
+#footer-main {
+    background-image: linear-gradient(to right,  white, midnightblue, midnightblue, midnightblue, midnightblue, midnightblue);
+    /* background: midnightblue; */
+    padding: 5vw;
+    border-radius: 0 20vw 0 0;
+}
+
+#footer-main, #footer-main a, h4 {
+    color: #FFF!important;
+}
+
+#footer-main a {
+    text-decoration: underline!important;
+}

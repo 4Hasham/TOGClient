@@ -1,0 +1,30 @@
+.cont {
+    position: absolute;
+    color: white;
+    height: 70vh;
+    width: 60%;
+    left: 8vw;
+    top: 20vh;
+}
+
+.invite {
+    position: absolute;
+    bottom:8vh;
+}
+
+.invite > table td {
+    padding: 0 1vw;
+}
+
+.invite-btn {
+    background-color: transparent!important;
+    box-shadow: none;
+    margin-left: 35vw;
+    margin-bottom: 10vh;
+    width: 14vw;
+    height: 9vh;
+}
+
+.invite-btn:hover {
+    background: #272a74!important;
+}

@@ -1,0 +1,13 @@
+.point {
+    width: 35px;
+    height: 35px;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+}
+.hole {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    color: white;
+    text-align: center;
+}

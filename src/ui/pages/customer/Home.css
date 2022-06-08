@@ -1,0 +1,18 @@
+#home-main {
+    display: block;
+    width: 65%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 5vh;
+}
+
+#home-btn {
+    display: block;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;   
+}
+
+#home-btn td {
+    padding: 4vw;
+}

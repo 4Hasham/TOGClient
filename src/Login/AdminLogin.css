@@ -1,0 +1,20 @@
+.login {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    height: 55vh;
+    padding: 2vw;
+    box-shadow: 1px 1px 1px 1px rgb(172, 170, 170);
+}
+
+.txtarea {
+    width: 100%;
+    margin: 1vh!important;
+}
+
+.loginbtn {
+    position: relative;
+    top: 10vh!important;
+    left: 15vw!important;
+}

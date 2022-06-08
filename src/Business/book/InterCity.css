@@ -1,0 +1,26 @@
+#main {
+    width: 100%;
+}
+
+#main_tab {
+    margin-left: 25%;
+    margin-top: 10%;
+}
+
+#main_tab td {
+    padding-bottom: 200px;
+}
+
+#main_tab td:nth-child(2) {
+    padding-left: 300px;
+}
+
+#pickup, #destination {
+    width: 11vw;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#main_tab > tr:nth-child(3) > td > button {
+    float: right;
+}
