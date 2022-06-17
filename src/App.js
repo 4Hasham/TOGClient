@@ -20,6 +20,7 @@ import {
 } from "react-router-dom";
 import Customer from './ui/pages/Customer';
 import Admin from './ui/pages/Admin';
+import Driver from './ui/pages/Driver';
 import SignUpAdmin from './SignUp/SignUpAdmin';
 import Footer from './ui/Footer';
 import FooterSimple from './ui/FooterSimple';
@@ -35,6 +36,10 @@ function App() {
         </Route>
         <Route path="/admin">
           <Admin />
+          <FooterSimple />
+        </Route>
+        <Route path="/driver">
+          <Driver />
           <FooterSimple />
         </Route>
         <Route path="/login">

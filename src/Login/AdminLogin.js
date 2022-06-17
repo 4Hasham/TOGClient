@@ -3,6 +3,7 @@ import { Button, TextField } from '@material-ui/core';
 import { isAlphaNumeric, validatePassword } from '../utils/Validation';
 import ReactSession from 'react-client-session/dist/ReactSession';
 import './AdminLogin.css';
+import { fetchAPI } from '../request/fetchAPI';
 
 export class AdminLogin extends Component {
     constructor() {
@@ -31,7 +32,7 @@ export class AdminLogin extends Component {
         body: JSON.stringify(this.state.form)
       };
       let str = new Promise((resolve, reject) => {
-        fetch("admin/login", requestOptions).then((res) => {
+        fetchAPI("admin/login", requestOptions).then((res) => {
           if(res.status == 200) {
             resolve(res.json());
           }

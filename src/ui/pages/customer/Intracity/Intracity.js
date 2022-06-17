@@ -8,8 +8,9 @@ import Geocode from 'react-geocode';
 import ReactSession from 'react-client-session/dist/ReactSession';
 import io from 'socket.io-client';
 import TrackRide from './TrackRide';
+import { fetchAPI } from '../../../../request/fetchAPI';
 
-var cli = io('http://localhost:5000', {
+var cli = io('https://truckongo-apim.azure-api.net/', {
     reconnectionDelay: 1000,
     reconnection: true,
     reconnectionAttemps: 10,
@@ -93,7 +94,7 @@ export class Intracity extends React.Component {
             })
         };
         return await new Promise((resolve, reject) => {
-            fetch("../register/address", requestOptions)
+            fetchAPI("../register/address", requestOptions)
             .then((res) => {
                 resolve(res.json());
             });
@@ -112,7 +113,7 @@ export class Intracity extends React.Component {
             body: JSON.stringify(d)
         };
         return await new Promise((resolve, reject) => {
-            fetch("../register/load", requestOptions)
+            fetchAPI("../register/load", requestOptions)
             .then((res) => {
                 resolve(res.json());
             });
@@ -146,7 +147,7 @@ export class Intracity extends React.Component {
                     loadID: loads['lID']
                 })
             };
-            fetch("../book/intracity", requestOptions)
+            fetchAPI("../book/intracity", requestOptions)
             .then(async(res) => {
                 var bo = {... await res.json()};
                 bo.pickup = pickup['aID'];
@@ -168,7 +169,7 @@ export class Intracity extends React.Component {
                                 }
                             })
                         };
-                        fetch("../firebase/findDrivers", requestOptions1)
+                        fetchAPI("../firebase/findDrivers", requestOptions1)
                         .then((res1) => {
                             console.log(res1.json());
                         });

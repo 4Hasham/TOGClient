@@ -7,8 +7,9 @@ import "./Intercity.css";
 import Truck from '../../../../Business/book/Truck';
 import ReactSession from 'react-client-session/dist/ReactSession';
 import io from 'socket.io-client';
+import { fetchAPI } from '../../../../request/fetchAPI';
 
-var cli = io('http://localhost:5000', {
+var cli = io('https://truckongo-apim.azure-api.net/', {
     reconnectionDelay: 1000,
     reconnection: true,
     reconnectionAttemps: 10,
@@ -87,7 +88,7 @@ export class Intercity extends React.Component {
             })
         };
         return await new Promise((resolve, reject) => {
-            fetch("../register/address", requestOptions)
+            fetchAPI("../register/address", requestOptions)
             .then((res) => {
                 resolve(res.json());
             });
@@ -106,7 +107,7 @@ export class Intercity extends React.Component {
             body: JSON.stringify(d)
         };
         return await new Promise((resolve, reject) => {
-            fetch("../register/load", requestOptions)
+            fetchAPI("../register/load", requestOptions)
             .then((res) => {
                 resolve(res.json());
             });
@@ -115,7 +116,7 @@ export class Intercity extends React.Component {
 
     getBooking = async(bID) => {
         var dat = await new Promise((resolve, reject) => {
-            fetch("../book/getIntercityBooking?bookingID=" + bID)
+            fetchAPI("../book/getIntercityBooking?bookingID=" + bID)
             .then((res) => {
                 resolve(res.json());                
             });
@@ -141,7 +142,7 @@ export class Intercity extends React.Component {
                     status: 0
                 })
             };
-            fetch("../register/intercity", requestOptions)
+            fetchAPI("../register/intercity", requestOptions)
             .then(async(res) => {
                 var bo = {...await res.json()};
                 var book = await this.getBooking(this.state.locationsData.time.key);
@@ -163,7 +164,7 @@ export class Intercity extends React.Component {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(obj)
                 };
-                fetch("../firebase/sendIntercityRequestToDriver", requestOptions);
+                fetchAPI("../firebase/sendIntercityRequestToDriver", requestOptions);
             });
         }
     }

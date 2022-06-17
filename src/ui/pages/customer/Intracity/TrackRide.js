@@ -7,8 +7,9 @@ import Geocode from 'react-geocode';
 import ReactSession from 'react-client-session/dist/ReactSession';
 import firebase from '../../../../firebase-config';
 import io from 'socket.io-client';
+import { fetchAPI } from '../../../../request/fetchAPI';
 
-var cli = io('http://localhost:5000', {
+var cli = io('https://truckongo-apim.azure-api.net/', {
     reconnectionDelay: 1000,
     reconnection: true,
     reconnectionAttemps: 10,
@@ -135,7 +136,7 @@ export class TrackRide extends React.Component {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({bookingID: booking})
         };
-        await fetch("../firebase/cancelRideCustomer", requestOptions)
+        await fetchAPI("../firebase/cancelRideCustomer", requestOptions)
         .then((res) => {
             console.log(res.json());
             window.location = '/customer';
@@ -155,7 +156,7 @@ export class TrackRide extends React.Component {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({bID: booking, rating: this.state.rating})
         };
-        await fetch("../book/completeRating", requestOptions)
+        await fetchAPI("../book/completeRating", requestOptions)
         .then((res) => {
             console.log(res.json());
             window.location = '/customer';

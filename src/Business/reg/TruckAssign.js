@@ -3,6 +3,7 @@ import { Button, TextField } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { getAddress, requestData } from './../../request/data';
 import './TruckAssign.css';
+import {fetchAPI} from '../../request/fetchAPI';
 
 export class TruckAssign extends Component {
     constructor() {
@@ -32,7 +33,7 @@ export class TruckAssign extends Component {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(e)
         };
-        fetch("../register/truckAssign", requestOptions);
+        fetchAPI("../register/truckAssign", requestOptions);
     }
 
     async componentDidMount() {
@@ -139,7 +140,8 @@ export class TruckAssign extends Component {
                 renderInput={
                     (params) => <TextField {...params} onBlur={this.buttonAttr} name="route" label="Route" onChange={this.updateState} />
                 } 
-                />}
+                />
+            }
                 <br />
                 {(this.state.form.days !== '') &&
                 <p><b>Days: </b>{this.state.form.days}</p>

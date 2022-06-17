@@ -1,5 +1,5 @@
 import React from 'react';
-import "./SidemenuAdmin.css";
+import "./Sidemenu.css";
 import {
     ProSidebar,
     Menu,
@@ -16,16 +16,14 @@ import {
     withRouter
 } from "react-router-dom";
 import { Image } from 'react-bootstrap';
-import { FaMap, FaTruck, FaCheck } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa";
 import { FiHome, FiLogOut } from "react-icons/fi";
 import { BiCog } from "react-icons/bi";
-import "react-pro-sidebar/dist/css/styles.css"; 
-import Home from './pages/admin/Home';
-import TruckAssign from '../Business/reg/TruckAssign';
-import IntercityRoute from '../Business/reg/IntercityRoute';
-import VerifyDrivers from './pages/admin/VerifyDrivers';
+import "react-pro-sidebar/dist/css/styles.css";
+import Home from './pages/drivers/Home';
+import DriverVerification from './pages/drivers/DriverVerification';
 
-export class SidemenuAdmin extends React.Component {
+export class SidemenuDriver extends React.Component {
 
     constructor(props) {
         super(props);
@@ -66,10 +64,7 @@ export class SidemenuAdmin extends React.Component {
                     <SidebarContent>
                         <Menu iconShape="square">                     
                         <MenuItem icon={<FiHome />}><Link to={`${match.url}/`}>Home</Link></MenuItem>
-                        <MenuItem icon={<FaMap />}><Link to={`/admin/route`}>Intercity Route</Link></MenuItem>
-                        <MenuItem icon={<FaTruck />}><Link to={`/admin/assign`}>Truck Assign</Link></MenuItem>
-                        <MenuItem icon={<FaCheck />}><Link to={`/admin/verifyDrivers`}>Verify Drivers</Link></MenuItem>
-                        <MenuItem icon={<BiCog />}>Settings</MenuItem>
+                        <MenuItem icon={<FaCheck />}><Link to={`/driver/verify`}>Verification</Link></MenuItem>
                         </Menu>
                     </SidebarContent>
                     <SidebarFooter>
@@ -79,24 +74,20 @@ export class SidemenuAdmin extends React.Component {
                     </SidebarFooter>
                     </ProSidebar>
                 </div>
+                <div style={{minWidth: '100%', minHeight: '80vh'}}>
                 <Switch>
-                    <Route path={`${match.url}/route`}>
-                        <IntercityRoute />
-                    </Route>
-                    <Route path={`${match.url}/assign`}>
-                        <TruckAssign />
-                    </Route>
-                    <Route path={`${match.url}/verifyDrivers`}>
-                        <VerifyDrivers />
+                    <Route path={`${match.url}/verify`}>
+                        <DriverVerification />
                     </Route>
                     <Route path={`${match.url}/`}>
                         <Home />
                     </Route>
                 </Switch>
+                </div>
             </Router>
         );
     }
 }
 
-const SidemenuAdminM = withRouter(SidemenuAdmin);
-export default SidemenuAdminM;
+const SidemenuDriverM = withRouter(SidemenuDriver);
+export default SidemenuDriverM;

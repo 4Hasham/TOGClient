@@ -3,6 +3,7 @@ import { Button, TextField } from '@material-ui/core';
 import { validateEmail, validatePassword } from '../utils/Validation';
 import ReactSession from 'react-client-session/dist/ReactSession';
 import './CustomerLogin.css';
+import { fetchAPI } from '../request/fetchAPI';
 
 export class CustomerLogin extends Component {
   constructor() {
@@ -31,7 +32,7 @@ export class CustomerLogin extends Component {
         body: JSON.stringify(this.state.form)
       };
       let str = new Promise((resolve, reject) => {
-        fetch("users/login", requestOptions).then((res) => {
+        fetchAPI("users/login", requestOptions).then((res) => {
           if(res.status == 200) {
             resolve(res.json());
           }

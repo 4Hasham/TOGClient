@@ -6,6 +6,7 @@ import "./History.css";
 import ReactSession from 'react-client-session/dist/ReactSession';
 import { getAddress } from '../../../request/data';
 import { TrackRide } from './Intracity/TrackRide';
+import { fetchAPI } from '../../../request/fetchAPI';
 export class History extends React.Component {
     constructor() {
         super();
@@ -33,7 +34,7 @@ export class History extends React.Component {
             })
         };    
         var dat = await new Promise((resolve, reject) => {
-            fetch("../book/getActiveCustomerRides", requestOptions)
+            fetchAPI("../book/getActiveCustomerRides", requestOptions)
             .then((res) => {
                 resolve(res.json());                
             });
@@ -56,7 +57,7 @@ export class History extends React.Component {
             })
         };
         var dat = await new Promise((resolve, reject) => {
-            fetch("../book/getPrevCustomerRides", requestOptions)
+            fetchAPI("../book/getPrevCustomerRides", requestOptions)
             .then((res) => {
                 resolve(res.json());                
             });
@@ -114,7 +115,7 @@ export class History extends React.Component {
 
     getPayment = async(pid) => {
         var dat = await new Promise((resolve, reject) => {
-            fetch("../api/getPaymentA?pid=" + pid)
+            fetchAPI("../api/getPaymentA?pid=" + pid)
             .then((res) => {
                 resolve(res.json());                
             });

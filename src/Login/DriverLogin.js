@@ -3,6 +3,7 @@ import { Button, TextField } from '@material-ui/core';
 import { validatePhone, validatePassword } from '../utils/Validation';
 import ReactSession from 'react-client-session/dist/ReactSession';
 import './DriverLogin.css';
+import { fetchAPI } from '../request/fetchAPI';
 
 export class DriverLogin extends Component {
   constructor() {
@@ -31,7 +32,7 @@ export class DriverLogin extends Component {
       body: JSON.stringify(this.state.form)
     };
     let str = new Promise((resolve, reject) => {
-      fetch("drivers/login", requestOptions).then((res) => {
+      fetchAPI("drivers/login", requestOptions).then((res) => {
         if(res.status == 200) {
           resolve(res.json());
         }

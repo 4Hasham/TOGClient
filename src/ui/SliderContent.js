@@ -21,7 +21,7 @@ export class SliderContent extends React.Component {
                     <table>
                         <tr>
                             <td>
-                                <Button className='invite-btn' onClick={(e) => {if(typeof ReactSession.get("custID") === "number") window.location='./customer'; else if (typeof ReactSession.get("adminID") === "number") window.location='./admin'; else window.location='./login'}} variant="primary">
+                                <Button className='invite-btn' onClick={(e) => {if(typeof ReactSession.get("custID") === "number") window.location='./customer'; else if (typeof ReactSession.get("adminID") === "number") window.location='./admin'; else if(typeof ReactSession.get("drivID") === "number") window.location='./driver'; else window.location='./login'}} variant="primary">
                                  Get Started
                                 </Button>
                             </td>

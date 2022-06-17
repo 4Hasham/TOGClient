@@ -67,7 +67,7 @@ export class Sidemenu extends React.Component {
                         <MenuItem icon={<FiHome />}><Link to={`${match.url}/`}>Home</Link></MenuItem>
                         <MenuItem icon={<FaWallet />}><Link to={`/customer/wallet`}>Wallet</Link></MenuItem>
                         <MenuItem icon={<FaHistory />}><Link to={`/customer/history`}>History</Link></MenuItem>
-                        <MenuItem icon={<FaCity />}><Link to={`/customer/intercityRides`}>History</Link></MenuItem>
+                        <MenuItem icon={<FaCity />}><Link to={`/customer/intercityRides`}>Intercity Rides</Link></MenuItem>
                         <MenuItem icon={<BiCog />}>Settings</MenuItem>
                         </Menu>
                     </SidebarContent>

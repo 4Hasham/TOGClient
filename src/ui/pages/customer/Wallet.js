@@ -2,6 +2,7 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import "./Wallet.css";
 import ReactSession from 'react-client-session/dist/ReactSession';
+import { fetchAPI } from '../../../request/fetchAPI';
 
 export class Wallet extends React.Component {
     constructor() {
@@ -18,7 +19,7 @@ export class Wallet extends React.Component {
 
     loadPrev = async() => {
         var dat = await new Promise((resolve, reject) => {
-            fetch("../users/getWallet?walletID=" + ReactSession.get("userID"))
+            fetchAPI("../users/getWallet?walletID=" + ReactSession.get("userID"))
             .then((res) => {
                 resolve(res.json());
             });

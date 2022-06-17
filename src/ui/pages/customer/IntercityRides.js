@@ -6,6 +6,7 @@ import "./History.css";
 import ReactSession from 'react-client-session/dist/ReactSession';
 import { getAddress } from '../../../request/data';
 import { TrackRide } from './Intracity/TrackRide';
+import { fetchAPI } from '../../../request/fetchAPI';
 export class IntercityRides extends React.Component {
     constructor() {
         super();
@@ -27,7 +28,7 @@ export class IntercityRides extends React.Component {
 
     loadActive = async(custID) => {    
         var dat = await new Promise((resolve, reject) => {
-            fetch("../book/getActiveIntercityRides?custID=" + custID)
+            fetchAPI("../book/getActiveIntercityRides?custID=" + custID)
             .then((res) => {
                 resolve(res.json());                
             });
@@ -50,7 +51,7 @@ export class IntercityRides extends React.Component {
 
     loadPrev = async(custID) => {
         var dat = await new Promise((resolve, reject) => {
-            fetch("../book/getPrevIntercityRides?custID=" + custID)
+            fetchAPI("../book/getPrevIntercityRides?custID=" + custID)
             .then((res) => {
                 resolve(res.json());                
             });
@@ -106,7 +107,7 @@ export class IntercityRides extends React.Component {
 
     getBooking = async(bID) => {
         var dat = await new Promise((resolve, reject) => {
-            fetch("../book/getIntercityBooking?bookingID=" + bID)
+            fetchAPI("../book/getIntercityBooking?bookingID=" + bID)
             .then((res) => {
                 resolve(res.json());                
             });
@@ -129,7 +130,7 @@ export class IntercityRides extends React.Component {
 
     getPayment = async(pid) => {
         var dat = await new Promise((resolve, reject) => {
-            fetch("../api/getPaymentA?pid=" + pid)
+            fetchAPI("../api/getPaymentA?pid=" + pid)
             .then((res) => {
                 resolve(res.json());                
             });

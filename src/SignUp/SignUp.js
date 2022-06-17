@@ -7,6 +7,7 @@ import { CustomerInfoSignUp } from './CustomerInfoSignUp';
 import { AdminSignUp } from './AdminSignUp';
 import { DriverInfoSignUp } from './DriverInfoSignUp';
 import ReactSession from 'react-client-session/dist/ReactSession';
+import { fetchAPI } from '../request/fetchAPI';
 
 export class SignUp extends Component {
 
@@ -40,11 +41,11 @@ export class SignUp extends Component {
       })
     };
     if(this.props.user === "customer")
-      fetch("users/signup", requestOptions);
+      fetchAPI("users/signup", requestOptions);
     else if(this.props.user === "admin")
-      fetch("admin/signup", requestOptions);
+      fetchAPI("admin/signup", requestOptions);
     else
-      fetch("drivers/signup", requestOptions);
+      fetchAPI("drivers/signup", requestOptions);
   }
 
   a11yProps(index) {

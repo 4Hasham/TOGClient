@@ -3,7 +3,7 @@ import { Button, TextField, Select, OutlinedInput, InputLabel, Chip, Box, MenuIt
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import './IntercityRoute.css';
 import * as cities from '../../utils/cities.json';
-
+import {fetchAPI} from '../../request/fetchAPI';
 var hours = [
     '00', '01' , '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12',
     '13' , '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'
@@ -42,7 +42,7 @@ export class IntercityRoute extends Component {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(e)
         };
-        fetch("../register/route", requestOptions);
+        fetchAPI("../register/route", requestOptions);
     }
 
     updateState = (e) => {

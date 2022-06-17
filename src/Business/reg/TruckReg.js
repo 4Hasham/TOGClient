@@ -4,6 +4,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { requestJSONData } from './../../request/data';
 import './TruckReg.css';
 import { isAlphaNumeric, isNumeric } from '../../utils/Validation';
+import { fetchAPI } from '../../request/fetchAPI';
 
 export class TruckReg extends Component {
     constructor() {
@@ -31,7 +32,7 @@ export class TruckReg extends Component {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(d)
         };
-        fetch("register/truck", requestOptions);
+        fetchAPI("register/truck", requestOptions);
     }
 
     async componentDidMount() {

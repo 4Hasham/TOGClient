@@ -40,7 +40,7 @@ export class NavigationBar extends React.Component {
                         <Nav.Link href="#download" style={{color: '#FFF', fontSize: '20px', fontWeight: 'bold', textDecoration: 'none'}}>Download</Nav.Link>
                         {ReactSession.get("userID") === undefined && (
                             <div>
-                                <Nav.Link href="./signup" style={{color: '#1b76fd', textDecoration: 'none'}}>Become a User</Nav.Link>
+                                <Nav.Link href="./signup" style={{color: '#FFF', fontSize: '20px', fontWeight: 'bold', textDecoration: 'none'}}>Become a User</Nav.Link>
                             </div>
                         )}
                     </Nav>
