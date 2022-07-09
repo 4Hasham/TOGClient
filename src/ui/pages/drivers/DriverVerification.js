@@ -32,6 +32,7 @@ export class DriverVerification extends Component {
 
     submitForm = async(event) => {
         event.preventDefault();
+        document.getElementById('submit').disabled = true;
         const formData = new FormData();
         formData.append('driverID', ReactSession.get('drivID'));
         formData.append('cnicFront', this.state.form.cnicFront);
@@ -78,7 +79,7 @@ export class DriverVerification extends Component {
                         <label>License Back</label><br />
                         <Input type='file' name='licenseBack' onChange={this.handleChange} />
                         <br /><br /><br />
-                        <Button type='submit' variant='contained' color='primary'>Submit</Button>
+                        <Button id="submit" type='submit' variant='contained' color='primary'>Submit</Button>
                     </form>
                     <br />
                 </div>

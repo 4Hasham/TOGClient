@@ -9,7 +9,7 @@ import ReactSession from 'react-client-session/dist/ReactSession';
 import io from 'socket.io-client';
 import { fetchAPI } from '../../../../request/fetchAPI';
 
-var cli = io('https://truckongo-apim.azure-api.net/', {
+var cli = io('http://localhost:5000/', {
     reconnectionDelay: 1000,
     reconnection: true,
     reconnectionAttemps: 10,

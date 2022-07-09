@@ -1,7 +1,8 @@
 import React from 'react';
-import { Container, Button } from '@material-ui/core';
+import { Container, Button, Input, CircularProgress } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
 import Map2 from '../../../../Business/loc/Map2';
+import { FaPaperPlane, FaCircle, FaAngleUp, FaAngleDown } from "react-icons/fa";
 import "./TrackRide.css";
 import Geocode from 'react-geocode';
 import ReactSession from 'react-client-session/dist/ReactSession';
@@ -9,7 +10,7 @@ import firebase from '../../../../firebase-config';
 import io from 'socket.io-client';
 import { fetchAPI } from '../../../../request/fetchAPI';
 
-var cli = io('https://truckongo-apim.azure-api.net/', {
+var cli = io('http://localhost:5000/', {
     reconnectionDelay: 1000,
     reconnection: true,
     reconnectionAttemps: 10,
@@ -30,6 +31,8 @@ export class TrackRide extends React.Component {
             place: '',
             returnData: null,
             rating: 0,
+            msgs: [],
+            opened: -1,
             pick: {
                 lat: 0,
                 lng: 0
@@ -72,7 +75,6 @@ export class TrackRide extends React.Component {
             this.state.veh.lat = dataa.lat;
             this.state.veh.lng = dataa.lng;
         }, (errorObject) => {
-            console.log(errorObject.name);
         });
     }
 
@@ -86,7 +88,6 @@ export class TrackRide extends React.Component {
                 d.pick.lng = lng;
             },
             (error) => {
-                console.log(error);
             }
         );
         await Geocode.fromAddress(this.props.locs.destination)
@@ -107,6 +108,7 @@ export class TrackRide extends React.Component {
         var st = await this.loadLocs();
         this.setState(st);
         setInterval(this.updateDriver, 2000);
+        setInterval(this.loadMsgs, 3000);
     }
 
     setMapApi = (m) => {
@@ -136,9 +138,8 @@ export class TrackRide extends React.Component {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({bookingID: booking})
         };
-        await fetchAPI("../firebase/cancelRideCustomer", requestOptions)
+        await fetchAPI("firebase/cancelRideCustomer", requestOptions)
         .then((res) => {
-            console.log(res.json());
             window.location = '/customer';
         });
     }
@@ -158,9 +159,54 @@ export class TrackRide extends React.Component {
         };
         await fetchAPI("../book/completeRating", requestOptions)
         .then((res) => {
-            console.log(res.json());
             window.location = '/customer';
         });
+    }
+
+    loadMsgs = async() => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({id1: ReactSession.get('userID'), id2: this.props.driverid})
+        };
+        await fetchAPI("../chat/getMsgs", requestOptions)
+        .then(async(res) => {
+            var f = await res.json();
+            var d = {...this.state};
+            d.msgs = [...f];
+            this.setState(d);
+        });
+        document.getElementById("box").scrollTo(0, document.getElementById("box").scrollHeight);
+    }
+
+    sendMsg = async(msg) => {
+        document.getElementById('msg').value = '';
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                message: msg,
+                sender: ReactSession.get('userID'),
+                receiver: this.props.driverid
+            })
+        };
+        await fetchAPI("../chat/send", requestOptions)
+        .then((res) => {
+            this.loadMsgs();
+        });
+    }
+
+    openChat = () => {
+        var el = document.getElementById('chat-body');
+        if(this.state.opened === -1) {
+            el.style.display = 'block';
+        }
+        else {
+            el.style.display = 'none';
+        }
+        var d = {...this.state};
+        d.opened = d.opened * -1;
+        this.setState(d);
     }
 
     render() {
@@ -212,6 +258,55 @@ export class TrackRide extends React.Component {
                         <Button onClick={this.rate}>Rate</Button>
                     </div>
                 )}
+                <div id="chatbox">
+                    <div id="bar" onClick={this.openChat}>
+                        {this.state.opened === -1 && (
+                            <FaAngleUp style={{width: '36px', height: '36px'}} color='white' />
+                        )}
+                        {this.state.opened === 1 && (
+                            <FaAngleDown style={{width: '36px', height: '36px'}} color='white' />
+                        )}
+                        Chat
+                        <span>
+                            <FaCircle style={{width: '16px', height: '16px', color: 'green'}} />
+                        </span>
+                    </div>
+                    <div id="chat-body">
+                        <div id="box">
+                        {this.state.msgs.length > 0 && (
+                        <div>
+                        {this.state.msgs?.map((ind, value) => {
+                            return (
+                                <div>
+                                    {this.state.msgs[value].sender == ReactSession.get('userID') && (
+                                        <div style={{display: 'block', borderRadius: '10px', float: 'right', background: '#90ee90', color: '#FFFFFF', padding: '8px'}}>
+                                            {this.state.msgs[value].message}
+                                        </div>
+                                    )}
+                                    {this.state.msgs[value].receiver == ReactSession.get('userID') && (
+                                        <div style={{display: 'block', borderRadius: '10px', float: 'left', background: '#0096FF', color: '#FFFFFF', padding: '8px'}}>
+                                            {this.state.msgs[value].message}
+                                        </div>
+                                    )}
+                                    <br /><br />
+                                </div>
+                            );
+                            })}
+                        </div>                                
+                        )}
+
+                        {this.state.msgs.length === 0 && (
+                            <CircularProgress />
+                        )}
+                        </div>
+                        <div id="dash">
+                            <Input style={{width: 325}} variant='outlined' id='msg' />
+                            <Button onClick={() => { this.sendMsg(document.getElementById('msg').value); }}>
+                                <FaPaperPlane style={{width: '24px', height: '24px', color: 'midnightblue'}} />
+                            </Button>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }

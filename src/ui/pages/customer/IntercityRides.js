@@ -180,6 +180,7 @@ export class IntercityRides extends React.Component {
                         </Tabs>
                     </AppBar>
                     <TabPanel value={this.state.value} index={0}>
+                        {(this.state.active.length > 0) && (
                         <List id="dsa" sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
                             {this.state.active?.map((value, ind) => {
                                 return(
@@ -226,8 +227,13 @@ export class IntercityRides extends React.Component {
                                 )
                             })}
                         </List>
+                        )}
+                        {this.state.active.length === 0 && (
+                            <CircularProgress />
+                        )}
                     </TabPanel>
                     <TabPanel value={this.state.value} index={1}>
+                        {this.state.prev.length > 0 && (
                         <List id="asd" sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
                             {this.state.prev?.map((value, ind) => {
                                 return(
@@ -263,6 +269,10 @@ export class IntercityRides extends React.Component {
                                 )
                             })}
                         </List>
+                        )}
+                        {this.state.prev.length === 0 && (
+                            <CircularProgress />
+                        )}
                     </TabPanel>
                 </div>
             )};

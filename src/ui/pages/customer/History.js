@@ -57,7 +57,7 @@ export class History extends React.Component {
             })
         };
         var dat = await new Promise((resolve, reject) => {
-            fetchAPI("../book/getPrevCustomerRides", requestOptions)
+            fetchAPI("book/getPrevCustomerRides", requestOptions)
             .then((res) => {
                 resolve(res.json());                
             });
@@ -96,6 +96,24 @@ export class History extends React.Component {
         };
     }
 
+    getDriverID = async(tID) => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                tID: tID
+            })
+        };
+        var dat = await new Promise((resolve, reject) => {
+            fetchAPI("drivers/getUserByTruck", requestOptions)
+            .then((res) => {
+                resolve(res.json());                
+            });
+        });
+        console.log(dat);
+        return dat;
+    }
+
     handleChange = (e) => {
         console.log(e.target.offsetParent.id.split('-')[2]);
         var tar = e.target;
@@ -115,7 +133,7 @@ export class History extends React.Component {
 
     getPayment = async(pid) => {
         var dat = await new Promise((resolve, reject) => {
-            fetchAPI("../api/getPaymentA?pid=" + pid)
+            fetchAPI("api/getPaymentA?pid=" + pid)
             .then((res) => {
                 resolve(res.json());                
             });
@@ -123,11 +141,13 @@ export class History extends React.Component {
         return dat.fare;
     }
 
-    showTracker = (bookingid, truckid, locationsData) => {
+    showTracker = async(bookingid, truckid, locationsData) => {
+        let driv = await this.getDriverID(truckid);
         var ob = {
             bookingid: bookingid,
             tID: truckid,
-            locationsData: locationsData 
+            locationsData: locationsData,
+            driver: driv
         };
         var d = {...this.state};
         d.trackBool = true;
@@ -148,6 +168,7 @@ export class History extends React.Component {
                         </Tabs>
                     </AppBar>
                     <TabPanel value={this.state.value} index={0}>
+                        {this.state.active.length > 0 && (
                         <List id="dsa" sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
                             {this.state.active?.map((value, ind) => {
                                 return(
@@ -194,8 +215,13 @@ export class History extends React.Component {
                                 )
                             })}
                         </List>
+                        )}
+                        {this.state.active.length === 0 && (
+                            <CircularProgress />
+                        )}
                     </TabPanel>
                     <TabPanel value={this.state.value} index={1}>
+                        {this.state.prev.length > 0 && (
                         <List id="asd" sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
                             {this.state.prev?.map((value, ind) => {
                                 return(
@@ -231,11 +257,15 @@ export class History extends React.Component {
                                 )
                             })}
                         </List>
+                        )}
+                        {this.state.prev.length === 0 && (
+                            <CircularProgress />
+                        )}
                     </TabPanel>
                 </div>
             )};
             {(this.state.track !== null) && (
-                <TrackRide bookingid={this.state.track.bookingid} truckid={this.state.track.tID} locs={this.state.track.locationsData} />
+                <TrackRide driver={this.state.track.driver} driverid={this.state.track.driver.userID} bookingid={this.state.track.bookingid} truckid={this.state.track.tID} locs={this.state.track.locationsData} />
             )}
             </div>
         );

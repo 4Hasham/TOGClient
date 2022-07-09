@@ -10,7 +10,7 @@ import io from 'socket.io-client';
 import TrackRide from './TrackRide';
 import { fetchAPI } from '../../../../request/fetchAPI';
 
-var cli = io('https://truckongo-apim.azure-api.net/', {
+var cli = io('http://localhost:5000/', {
     reconnectionDelay: 1000,
     reconnection: true,
     reconnectionAttemps: 10,
@@ -287,7 +287,7 @@ export class Intracity extends React.Component {
                     </div>
                 )}
                 {this.state.returnData !== null && (
-                    <TrackRide bookingid={this.state.returnData.truck.length} truckid={this.state.returnData.truck.tID} locs={this.state.locationsData} />
+                    <TrackRide driverid={this.state.returnData.account.ID} bookingid={this.state.returnData.truck.length} truckid={this.state.returnData.truck.tID} locs={this.state.locationsData} />
                 )}
             </div>
         );
