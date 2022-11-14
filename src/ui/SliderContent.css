@@ -1,10 +1,9 @@
 .cont {
-    position: absolute;
-    color: white;
+    color: #333;
     height: 70vh;
     width: 60%;
-    left: 8vw;
-    top: 20vh;
+    font-weight:lighter;
+    margin-left: 4%;
 }
 
 .invite {

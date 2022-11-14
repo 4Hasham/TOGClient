@@ -44,7 +44,6 @@ export class IntraCity extends Component {
         this.setState(d);
         if(this.checkOnlyUnempty()) {
             this.props.setData(this.state.form);
-            console.log("SENT 1 MAPS");
         }
     }
 

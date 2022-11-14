@@ -19,13 +19,15 @@ export class Footer extends React.Component {
                             <img 
                                 alt=""
                                 src="/logo.png"
-                                width="87"
-                                height="50"
+                                width="120"
+                                height="70"
                                 className="d-inline-block align-top"
                             /><br /><br />
-                            <Typography style={{width: '30vw'}}>
+                            <span class="quote_inv_s">"</span>
+                            <Typography id="info_txt">
                                 TruckOnGo does not only care about business and firms, but we also keep in mind the day-to-day logistics and movements that an average household may need.
                             </Typography>
+                            <span class="quote_inv_e">"</span>
                             </Col>
                             <Col>
                                 <h4 className='heading'>Links</h4>
@@ -34,6 +36,9 @@ export class Footer extends React.Component {
                                         <Nav.Link>Home</Nav.Link>
                                         <Nav.Link>About</Nav.Link>
                                         <Nav.Link>Careers</Nav.Link>
+                                        <Nav.Link>Offers</Nav.Link>
+                                        <Nav.Link>Download</Nav.Link>
+
                                     </Nav>
                                 </Navbar>
                             </Col>

@@ -16,12 +16,13 @@ import {
     withRouter
 } from "react-router-dom";
 import { Image } from 'react-bootstrap';
-import { FaCheck } from "react-icons/fa";
+import { FaCheck, FaTruck } from "react-icons/fa";
 import { FiHome, FiLogOut } from "react-icons/fi";
 import { BiCog } from "react-icons/bi";
 import "react-pro-sidebar/dist/css/styles.css";
 import Home from './pages/drivers/Home';
 import DriverVerification from './pages/drivers/DriverVerification';
+import TruckReg from '../Business/reg/TruckReg';
 
 export class SidemenuDriver extends React.Component {
 
@@ -64,6 +65,7 @@ export class SidemenuDriver extends React.Component {
                     <SidebarContent>
                         <Menu iconShape="square">                     
                         <MenuItem icon={<FiHome />}><Link to={`${match.url}/`}>Home</Link></MenuItem>
+                        <MenuItem icon={<FaTruck />}><Link to={`/driver/regTruck`}>Register Truck</Link></MenuItem>
                         <MenuItem icon={<FaCheck />}><Link to={`/driver/verify`}>Verification</Link></MenuItem>
                         </Menu>
                     </SidebarContent>
@@ -76,6 +78,9 @@ export class SidemenuDriver extends React.Component {
                 </div>
                 <div style={{minWidth: '100%', minHeight: '80vh'}}>
                 <Switch>
+                    <Route path={`${match.url}/regTruck`}>
+                        <TruckReg />
+                    </Route>
                     <Route path={`${match.url}/verify`}>
                         <DriverVerification />
                     </Route>

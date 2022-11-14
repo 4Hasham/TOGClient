@@ -39,3 +39,19 @@ export async function getIntercity(pickup, destination) {
         });
     }
 }
+
+export async function getTruck(tID) {
+    if(tID !== null) {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({tID: tID})
+        };
+        return await new Promise((resolve, reject) => {
+            fetchAPI("../drivers/getTruck", requestOptions)
+            .then((res) => {
+                resolve(res.json());
+            });
+        });
+    }
+}

@@ -32,7 +32,6 @@ export class Categories extends Component {
     }
 
     updateState = (e) => {
-        console.log(this.state.data.categories);
         var t = e.target;
         if(t.value.trim().length === 0) {
             console.log("empty input");
@@ -42,7 +41,6 @@ export class Categories extends Component {
     isValidCategory = (value) => {
         for(let i = 0; i < this.getCategories().length; ++i) {    
             if(this.getCategories()[i]['label'] === value) {
-                console.log(this.getCategories()[i]['label']);
                 return true;
             }
         }
@@ -54,7 +52,6 @@ export class Categories extends Component {
         const { value } = target;
         cont = this.isValidCategory(value.trim());
         if(cont) {
-            console.log(value);
             var dumb = {...this.state};
             if(dumb.form.categories.filter(({label}) => label === value).length === 0)
                 dumb.form[fieldName].push({key: this.getCategories().find(({ label }) => label === value).key, label: value});
@@ -64,7 +61,6 @@ export class Categories extends Component {
                 this.buttonAttr();
             });
         }
-        console.log(this.state.form.categories);
     }
 
     getCategories = () => {
@@ -133,7 +129,6 @@ export class Categories extends Component {
                     var ob = this.getCategories().find(({ label }) => label === this.props.setCategories[0]);
                     if(ob !== undefined) {
                         var ret = {key: ob.key, label: this.props.setCategories[0]};
-                        console.log(ret);
                         dumb.form["categories"].push(ret);
                     }
                 }

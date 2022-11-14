@@ -1,8 +1,10 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&family=Space+Grotesk:wght@300&display=swap'); */
+
 #footer-main {
-    background-image: linear-gradient(to right,  white, midnightblue, midnightblue, midnightblue, midnightblue, midnightblue);
-    /* background: midnightblue; */
+    /* background-image: linear-gradient(to right,  white, midnightblue, midnightblue); */
+    background: midnightblue;
     padding: 5vw;
-    border-radius: 0 20vw 0 0;
+    border-radius: 70% 0 0 0;
 }
 
 #footer-main, #footer-main a, h4 {
@@ -11,4 +13,21 @@
 
 #footer-main a {
     text-decoration: underline!important;
+}
+
+#info_txt {
+    padding-left: 50px;
+    width: 35vw;
+    font-size: 19px;
+}
+
+.quote_inv_s {
+    font-size: 50px;
+    color: midnightblue;
+}
+
+.quote_inv_e {
+    font-size: 50px;
+    color: #FFF;
+    margin-left: 85%;
 }

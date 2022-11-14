@@ -43,6 +43,7 @@ export class Intracity extends React.Component {
             cli.emit('join', "Hello from " + ReactSession.get('custID'));
         });
         cli.on('rideshare_' + ReactSession.get('custID'), (data1) => {
+            console.log(data1);
             let v = {...this.state};
             v.returnData = data1;
             this.setState(v);
@@ -171,7 +172,6 @@ export class Intracity extends React.Component {
                         };
                         fetchAPI("../firebase/findDrivers", requestOptions1)
                         .then((res1) => {
-                            console.log(res1.json());
                         });
                     },
                     (error) => {
@@ -191,7 +191,6 @@ export class Intracity extends React.Component {
 
     setData = (target, val) => {
         var d = {...this.state};
-        console.log(val);
         d[target] = val;
         if(target === 'locationsData')
             d['locationsCompleted'] = 1;
@@ -219,7 +218,6 @@ export class Intracity extends React.Component {
     }
 
     handleChange = (e) => {
-        console.log(e.target.offsetParent.id.split('-')[2]);
         var tar = e.target;
         var val = parseInt(tar.offsetParent.id.split('-')[2]);
         var d = {...this.state};
@@ -228,7 +226,6 @@ export class Intracity extends React.Component {
     }    
 
     signUpButton = () => {
-        console.log(this.state.locationsCompleted, this.state.loadsCompleted);
         if(this.state.locationsCompleted === 0 || this.state.loadsCompleted === 0)
           return {
             disabled: 'true'
@@ -287,7 +284,7 @@ export class Intracity extends React.Component {
                     </div>
                 )}
                 {this.state.returnData !== null && (
-                    <TrackRide driverid={this.state.returnData.account.ID} bookingid={this.state.returnData.truck.length} truckid={this.state.returnData.truck.tID} locs={this.state.locationsData} />
+                    <TrackRide driverid={this.state.returnData.driver.account.ID} bookingid={this.state.returnData.truck.length} truckid={this.state.returnData.truck.tID} locs={this.state.locationsData} />
                 )}
             </div>
         );

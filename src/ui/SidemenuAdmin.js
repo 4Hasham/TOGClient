@@ -69,7 +69,7 @@ export class SidemenuAdmin extends React.Component {
                         <MenuItem icon={<FaMap />}><Link to={`/admin/route`}>Intercity Route</Link></MenuItem>
                         <MenuItem icon={<FaTruck />}><Link to={`/admin/assign`}>Truck Assign</Link></MenuItem>
                         <MenuItem icon={<FaCheck />}><Link to={`/admin/verifyDrivers`}>Verify Drivers</Link></MenuItem>
-                        <MenuItem icon={<BiCog />}>Settings</MenuItem>
+                        <MenuItem icon={<BiCog />}><Link to={`${match.url}/`}>Settings</Link></MenuItem>
                         </Menu>
                     </SidebarContent>
                     <SidebarFooter>

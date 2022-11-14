@@ -1,5 +1,5 @@
 import { React, Component } from 'react';
-import { Button, TextField } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { requestJSONData } from './../../request/data';
 import { Load } from './Load';
@@ -30,28 +30,23 @@ export class Truck extends Component {
         let d = {...this.state};
         for(let a in prevData)
             d['form'][a] = prevData[a];
-        this.setState(prevData, () => {console.log(this.state.form)});
-        console.log(prevData);
+        this.setState(prevData);
     }
 
     checkOnlyUnempty = () => {
         let total = Object.keys(this.state.form).length;
         let field_arr = [];
-        console.log("CHECK STTAT");
         for(let s in this.state.form) {
             if(typeof this.state.form[s] === 'string' || this.state.form[s] instanceof String) {
-                console.log("string det");
                 if(this.state.form[s] !== '')
                     field_arr.push(s);
             }
             else {
-                console.log("arr det");
                 if(this.state.form[s].length > 0) {
                     field_arr.push(s);
                 }
             }
         }
-        console.log("TOTAL FIELDS: " + total + "\nCounted: " + field_arr.length);
         if(field_arr.length === total)
           return true;
         else
@@ -69,7 +64,6 @@ export class Truck extends Component {
                 this.state.data.mapL.push(JSON.stringify(this.state.data.rawCat[i]["keywords"]));
             }
         }
-        console.log(dum);
         this.setState(dum);
     }
 
@@ -85,10 +79,7 @@ export class Truck extends Component {
         var dumb1 = {...this.state};
         dumb1.form[t.name] = t.value;
         this.setState(dumb1, () => {
-            console.log(this.state);
-            console.log("IN UPDATE STATE");
             if(this.checkOnlyUnempty()) {
-                console.log("YEAH (UPDAYE)");
                 this.props.setData(this.state.form);
             }    
         });
@@ -110,9 +101,7 @@ export class Truck extends Component {
             dumb.form[fieldName] = value;
             this.setState(dumb, async() => {
                 this.buttonAttr();
-                console.log("IN HANDLE TAG");
                 if(this.checkOnlyUnempty()) {
-                    console.log("YEAH HANDLE TAG");
                     this.props.setData(this.state.form);
                 }
             });
@@ -123,11 +112,9 @@ export class Truck extends Component {
         var dumb = {...this.state};
         dumb.form['loads'] = [...arr];
         this.setState(dumb, async() => {
-            console.log(this.state.form.loads);
             this.suggestCategories(this.state.form.loads, this.state.form.categories);
             this.buttonAttr();
             if(this.checkOnlyUnempty()) {
-                console.log("YEAH");
                 this.props.setData(this.state.form);
             }
         });       
@@ -138,10 +125,8 @@ export class Truck extends Component {
         dumb.form['categories'] = [...arr];
         dumb.form['categories'] = [...new Set(dumb.form['categories'])];
         this.setState(dumb, async() => {
-            console.log(this.state.form.categories);
             this.buttonAttr();
             if(this.checkOnlyUnempty()) {
-                console.log("YEAH");
                 await this.suggestVehicles(this.state.form.categories, this.state.form.truck);
                 this.props.setData(this.state.form);
             }
@@ -154,7 +139,6 @@ export class Truck extends Component {
 
     isEmptyState = () => {
         for(let c in this.state.form) {
-            console.log(this.state.form[c]);
             if(typeof this.state.form[c] === 'string' || this.state.form[c] instanceof String)
                 if(this.state.form[c].trim() === '')
                     return true;
@@ -193,15 +177,12 @@ export class Truck extends Component {
             for(let j = 0; j < jsonObject.length; ++j){
                 pool.push(jsonObject[j]);
             }
-            console.log(sl[0].label, pool.indexOf(sl[0].label));
             for(let k = 0; k < sl.length; ++k) {
                 if(sl[k] !== undefined) {
                     if(pool.indexOf(sl[k].label) >= 0) {
                         if(Object.keys(this.state.data.rawCat)[i] !== undefined) {
-                            console.log(Object.keys(this.state.data.rawCat)[i]);
                             if(!suggestions.includes(Object.keys(this.state.data.rawCat)[i])) {
                                 suggestions.push(Object.keys(this.state.data.rawCat)[i]);
-                                console.log(suggestions);
                             }    
                         }
                     }    
@@ -215,9 +196,7 @@ export class Truck extends Component {
 
         let d = {...this.state};
         d.form.categories = [...suggestions];
-        this.setState(d, () => {
-            console.log(this.state.form.categories);
-        });
+        this.setState(d);
     }
 
     suggestVehicles = async(s, cur) => {
@@ -240,7 +219,6 @@ export class Truck extends Component {
 
         let d = {...this.state};
         d.form.truck = suggestions[0];
-        console.log(d.form.truck);
         this.setState(d);
     }
 

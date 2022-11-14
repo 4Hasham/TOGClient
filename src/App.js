@@ -24,6 +24,7 @@ import Driver from './ui/pages/Driver';
 import SignUpAdmin from './SignUp/SignUpAdmin';
 import Footer from './ui/Footer';
 import FooterSimple from './ui/FooterSimple';
+import Banner from './ui/Banner';
 //import Route from './Business/reg/Route';
 function App() {
   return (
@@ -59,8 +60,9 @@ function App() {
         </Route>
         <Route path="/">
           <NavigationBar />
-          <Slider />
+          <Banner />
           <FrontContent />
+          <Slider />
           <Footer />
         </Route>
       </Switch>

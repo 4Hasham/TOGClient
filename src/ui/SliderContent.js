@@ -2,7 +2,6 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import "react-alice-carousel/lib/alice-carousel.css";
 import './SliderContent.css';
-import { Button } from 'react-bootstrap';
 import ReactSession from 'react-client-session/dist/ReactSession';
 
 export class SliderContent extends React.Component {
@@ -17,7 +16,7 @@ export class SliderContent extends React.Component {
                 <Typography variant="h2" className="cont_txt">
                     {this.props.cont}
                 </Typography>
-                <div className="invite">
+                {/* <div className="invite">
                     <table>
                         <tr>
                             <td>
@@ -27,7 +26,7 @@ export class SliderContent extends React.Component {
                             </td>
                         </tr>
                     </table>
-                </div>
+                </div> */}
             </div>
         );
     }

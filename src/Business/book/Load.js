@@ -31,7 +31,6 @@ export class Load extends Component {
     }
 
     updateState = (e) => {
-        console.log(this.state.data.load);
         var t = e.target;
         if(t.value.trim().length === 0) {
             console.log("empty input");
@@ -41,7 +40,6 @@ export class Load extends Component {
     isValidLoad = (value) => {
         for(let i = 0; i < this.getLoads().length; ++i) {    
             if(this.getLoads()[i]['label'] === value) {
-                console.log(this.getLoads()[i]['label']);
                 return true;
             }
         }
@@ -53,7 +51,6 @@ export class Load extends Component {
         const { value } = target;
         cont = this.isValidLoad(value.trim());
         if(cont) {
-            console.log(value);
             var dumb = {...this.state};
             if(dumb.form.load.filter(({label}) => label === value).length === 0)
                 dumb.form[fieldName].push({key: this.getLoads().find(({ label }) => label === value).key, label: value});
@@ -62,7 +59,6 @@ export class Load extends Component {
                 this.buttonAttr();
             });
         }
-        console.log(this.state.form.load);
     }
 
     getLoads = () => {
@@ -102,7 +98,6 @@ export class Load extends Component {
             }
         }, () => {
             //this.props.getLoad(this.state.form.load);
-            console.log("From laod: fired")
         });
     }
 

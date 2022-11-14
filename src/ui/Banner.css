@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Edu+TAS+Beginner&family=Roboto:wght@200&family=Space+Grotesk:wght@300&display=swap');
+
+#banner {
+    background: url('../../public/banner.jpg');
+    background-size: cover;
+    width: 98.7vw;
+    height: 100vh;
+    padding-left: 10%;
+    padding-top: 15%;
+}
+
+#content > p {
+    color: #FFF;
+    font-size: 40px!important;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#tagline {
+    font-family: 'Edu TAS Beginner', cursive!important;
+    color: wheat!important;
+}
+
+#main-btn {
+    height: 60px;
+    width: 200px;
+    margin-top: 4%;
+    color: #000;
+    background: #e3e3e3;
+    opacity: 0.3;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 200;
+}
+
+#main-btn:hover {
+    opacity: 0.9;
+}

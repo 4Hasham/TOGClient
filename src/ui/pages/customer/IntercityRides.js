@@ -215,11 +215,11 @@ export class IntercityRides extends React.Component {
                                                     />
                                                 </ListItem>
                                                 </td>
-                                                <td>
+                                                {/* <td>
                                                     <Button onClick={(e) => {this.showTracker(value.bID, value.truckID, {pickup: value.pickup, destination: value.destination})}}>
                                                 &gt;
                                                 </Button>
-                                                </td>
+                                                </td> */}
                                             </tr>
                                         </table>
                                         <Divider variant="inset" component="li" />

@@ -4,6 +4,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { getAddress, requestData } from './../../request/data';
 import './TruckAssign.css';
 import {fetchAPI} from '../../request/fetchAPI';
+import { Alert } from 'react-bootstrap';
 
 export class TruckAssign extends Component {
     constructor() {
@@ -24,16 +25,32 @@ export class TruckAssign extends Component {
     }
 
     sendInfo = async() => {
-        console.log(this.state);
         var e = {...this.state.form};
 //        e["admin"] = localStorage.getItem("admin");
-        console.log(e);
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(e)
         };
-        fetchAPI("../register/truckAssign", requestOptions);
+        var rs = await fetchAPI("../register/truckAssign", requestOptions);
+        var formn = {
+            truck: '',
+            route: '',
+            routeID: 0,
+            days: ''
+        }
+        var f = {...this.state};
+        f.form = formn;
+        this.setState(f);
+        let ss = await rs.json();
+        if(ss.truckID < 0) {
+            document.getElementById("success-msg").style.display = 'none';
+            document.getElementById("error-msg").style.display = 'block';            
+        }
+        else {
+            document.getElementById("error-msg").style.display = 'none';
+            document.getElementById("success-msg").style.display = 'block';
+        }
     }
 
     async componentDidMount() {
@@ -46,7 +63,10 @@ export class TruckAssign extends Component {
     }
 
     getRoutes = () => {
-        return this.state.data.dRoutes;
+        if(typeof this.state.data.dRoutes === 'undefined')
+            return [];
+        else
+            return this.state.data.dRoutes;
     }
 
     makeRoutes = async() => {
@@ -65,7 +85,6 @@ export class TruckAssign extends Component {
     }
 
     updateState = (e) => {
-        //console.log("Inside");
         const {name, value} = e.target;
         var o = {...this.state};
         o["form"][name] = value;
@@ -80,14 +99,11 @@ export class TruckAssign extends Component {
     }
 
     showInfo = () => {
-        console.log("In show info")
         var arr = this.state.data.dRoutes;
         var days = "";
         for(let i = 0; i < arr.length; ++i) {
             if(arr[i]["label"] === this.state.form.route) {
-                console.log(arr[i]);
                 var daysA = JSON.parse(arr[i]["days"]);
-                //console.log(daysA)
                 for(let j = 0; j < daysA.length; ++j) {
                     days += daysA[j];
                     if(j !== daysA.length - 1)
@@ -96,7 +112,6 @@ export class TruckAssign extends Component {
                 var o = {...this.state};
                 o["form"]["days"] = days;
                 this.setState(o, () => {
-//                    console.log(this.state);
                 });
                 break;
             }
@@ -104,31 +119,39 @@ export class TruckAssign extends Component {
     }
 
     handleTag = ({ target }, fieldName) => {
-     //   console.log("Innnnnnnnn")
         const { value } = target;
         var o = {...this.state};
         o["form"][fieldName] = value;
         let curid = 0;
         for(let i = 0; i < this.state.data.dRoutes.length; ++i) {
             if(this.state.data.dRoutes[i]['label'] === value) {
-                //console.log(value, this.state.data.dRoutes[i]['label']);
-                //console.log(this.state.data.dRoutes[i]);
                 curid = this.state.data.dRoutes[i]['key'];
                 break;
             }
         }
         o["form"]["routeID"] = curid;
-        console.log(o);
         this.setState(o, () => {
             this.showInfo();
-            console.log(this.state);
         });        
     }
 
     render() {
         return(
             <div id="home-main">
-            <h4>Assign Truck to Route</h4>
+            <h3>Assign Truck to Route</h3>
+            <br />
+            <Alert id="success-msg" variant='success'>
+                    <Alert.Heading>
+                        Success
+                    </Alert.Heading>
+                    <p>Truck assigned.</p>
+            </Alert>
+            <Alert id="error-msg" variant='danger'>
+                    <Alert.Heading>
+                        Error
+                    </Alert.Heading>
+                    <p>Truck does not exist.</p>
+            </Alert>
             <br />
             {(this.state.data.dRoutes !== null) &&
                 <Autocomplete

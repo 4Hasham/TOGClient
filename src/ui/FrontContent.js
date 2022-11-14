@@ -92,7 +92,7 @@ export class FrontContent extends React.Component {
                     <table>
                         <tr>
                             <td style={{paddingLeft: '20vw', paddingRight: '20vw', paddingTop: '20vh', paddingBottom: '20vh'}}>
-                                <h3 style={{color: 'white'}}>Download Now</h3>
+                                <h3 style={{color: 'white'}}>Coming Soon</h3>
                             </td>
                             <td>
                                 <Button>

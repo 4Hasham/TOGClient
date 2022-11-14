@@ -15,9 +15,9 @@ export class Slider extends React.Component {
             index: 0,
             txt: "We help you meet your daily logistic needs.",
             galleryItems: [
-                <img src="slider/img1.jpg" alt="1"/>,
-                <img src="slider/img2.jpg" alt="2"/>,
-                <img src="slider/img3.jpg" alt="3"/>
+                <img src="" alt="1"/>,
+                <img src="" alt="2"/>,
+                <img src="" alt="3"/>
             ]
         };
     }
@@ -51,7 +51,7 @@ export class Slider extends React.Component {
     render() {
         return(
             <div>
-                <AliceCarousel
+                <AliceCarousel id="slides"
                     items={this.state.galleryItems}
                     responsive={this.responsive}
                     autoPlayInterval={2500}
